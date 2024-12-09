@@ -23,14 +23,14 @@ export class AuthService {
             }
 
         } catch (error) {
-            throw error
+            console.log("appwrith service login()",error);
         }
     }
     async login({email, password}){
         try {
             return await this.account.createEmailPasswordSession(email,password)
         } catch (error) {
-            throw error
+            console.log("appwrith service login()",error);
         }
     }
     async getCurrentUser(){
