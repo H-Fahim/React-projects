@@ -1,9 +1,10 @@
 import React from 'react'
 
-function Container() {
+export default function Container ({children}) {
   return (
-    <div>Container</div>
+    <div className='w-full max-w-7xl mx-auto px-4'>
+     {children}
+    </div>
   )
 }
 
-export default Container
