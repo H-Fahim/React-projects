@@ -1,8 +1,44 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React , {useState , useEffect} from 'react'
+import appwriteService from '../appwrite/config'
+import PostCard from '../components/PostCard'
+import Container from "../components/container/Container"
+
+
+
 
 function AllPosts() {
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    appwriteService.getPosts([]).then((posts)=> {
+      if (posts)
+         setPosts(posts.documents) 
+    })
+  }, [])
+
+  if (posts.length === 0) {
+    <div className='w-full py-8'>
+      <Container>
+        <div className='flex flex-wrap'>
+            <h1> Login to see Posts </h1>
+        </div>
+      </Container>
+   </div>
+  }
+  
   return (
-    <div>AllPosts</div>
+    <div className='w-full py-8'>
+      <Container>
+        <div className='flex flex-wrap'>
+            {posts.map((post) => (
+              <div className='p-2 w-1/4' key={post.$id}>
+                <PostCard {...post}  /> 
+              </div>))}
+        </div>
+      </Container>
+
+   </div>
   )
 }
 
