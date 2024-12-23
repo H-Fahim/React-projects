@@ -10,19 +10,20 @@ import { login} from "../store/authSlice"
 import {useDispatch} from 'react-redux'
 
 function Signup() {
-    const navigate = useNavigate()
-    const [error , setError] = useState('')
-    const dispatch = useDispatch()
-    const { register, handleSubmit } = useForm()
+    const navigate = useNavigate();
+    const [error , setError] = useState('');
+    const dispatch = useDispatch();
+    const { register, handleSubmit } = useForm();
 
     const create = async (data) => {
         setError('')
         try {
-            const userData = await authService.createAccount(data)
+            const userData = await authService.createAccount(data);
             if(userData) {
                 const user = await authService.getCurrentUser()
                 if(user) {
-                    dispatch(login(user))
+                    //dispatch(login(user))
+                    dispatch(login({ userData: user }));
                     navigate('/')
                 }
             }
@@ -67,7 +68,7 @@ function Signup() {
                         label='Password'
                         type = 'password'  
                     />
-                    <Button type='submit' className='w-full'>
+                    <Button type='submit' className='w-full hover:bg-blue-700 click:bg-blue-900'>
                         Sign up
                     </Button>
                 </form>

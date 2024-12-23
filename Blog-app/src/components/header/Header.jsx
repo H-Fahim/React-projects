@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import {Container} from "../container/Container"
-import {Logo} from "../Logo"
+// import {Container} from "../container/Container"
+import Logo from "../Logo"
 import {Link , useNavigate} from "react-router-dom"
 import LogoutBtn from "./LogoutBtn"
 import { useSelector } from 'react-redux'
+import Container from '../container/Container'
 
 
 
@@ -19,34 +20,34 @@ function Header() {
       active: true
     },
     {
-      name: "Login",
+      name: "Log In",
       slug: "/login",
       active: !authStatus
     },
     {
-      name: "Singup",
-      slug: "/singup",
+      name: "Sign Up",
+      slug: "/signup",
       active: !authStatus
     },
     {
-      name: "All Post",
-      slug: "/allpost",
+      name: "All Posts",
+      slug: "/all-posts",
       active: authStatus
     },
     {
       name: "Add Post",
-      slug: "/addpost",
+      slug: "/add-post",
       active: authStatus
     }
   ]
 
   return (
-    <header className='py-3 shadow bg-gray-500'>
+    <header className='py-3 shadow bg-blue-500 text-white'>
       <Container>
         <nav className='flex'>
-          <div className='mr-4'>
+          <div className='mr-4 rounded-full'>
             <Link to="/">
-             <Logo/>
+             <Logo  width="200px" />
             </Link>
           </div>
           <ul className='flex ml-auto'>
@@ -57,7 +58,7 @@ function Header() {
                       <button
                         onClick={()=> navigate (item.slug)}
                         className='inline-block px-6 py-2 
-                        duration-200 hover:bg-blue-100 
+                        duration-200 hover:bg-blue-600 
                         rounded-full'>
                           { item.name }
                       </button>

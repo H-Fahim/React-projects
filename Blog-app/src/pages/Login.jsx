@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Login as logincomponent } from "../components/index"
+import { Login as Logincomponent } from "../components/index"
 
 function Login() {
   return (
     <div className=' py-8'>
-      <logincomponent />
+      <Logincomponent />
     </div>
   )
 }

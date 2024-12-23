@@ -2,11 +2,11 @@
 
 
 import Login from './Login';
-import SignUp from './SignUp';
+import Signup from './SignUp';
 
 
 
 export {
     Login,
-    SignUp
+    Signup
 };
