@@ -3,7 +3,7 @@ import React, {useState}from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import appwriteService from '../appwrite/config'
 import { useEffect } from 'react'
-import Container from '../components/Container'
+import Container from '../components/Container/Container'
 import PostForm from '../components/Post-Form/PostForm'
 
 

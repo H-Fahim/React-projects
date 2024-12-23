@@ -7,6 +7,7 @@ import Select from "../Select"
 import appwriteService from "../../appwrite/config"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ID } from "appwrite";
 
 export default function PostForm ({post}) {
     const {register , handleSubmit ,watch, setValue, control , getValues} = useForm({
@@ -44,7 +45,7 @@ export default function PostForm ({post}) {
                const fileId = data.$id
                data.featuredImage = fileId 
                const dbPost = appwriteService.
-                 createPost({...data , userId = userData.$id})
+                 createPost({...data , userId: userData.$id})
 
                if (dbPost){
                 navigate( `/post/${dbPost.$id}`)

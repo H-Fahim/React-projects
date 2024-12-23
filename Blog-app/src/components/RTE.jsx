@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import {Contrller} from "react-hook-form"
+import {Controller} from "react-hook-form"
 import { Editor } from "@tinymce/tinymce-react"
 
 function RTE({
@@ -14,7 +15,7 @@ function RTE({
                 {label}
             </label>
         }
-        <Contrller
+        <Controller
             name = {name || "content"}
             control = {control}
             render = {({field: {onChange}}) => (
