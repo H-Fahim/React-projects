@@ -1,20 +1,19 @@
 import conf from "../conf/conf.js"
 import { Client, Account, ID } from "appwrite";
 
-export class AuthService {
-    client = new Client();
-    account;
+const client = new Client()
+    .setEndpoint(conf.appwriteUrl)
+    .setProject(conf.appwriteProjectId)
 
-    constructor (){
-        this.client
-        .setEndpoint(conf.appwriteUrl)
-        .setProject(conf.appwriteProjectId)
-        this.account = new Account(this.client)
-    }
+const account = new Account(client)
+
+const authService = {
+    account,
 
     async createAccount({email, password, name}){
+
         try {
-            const userAccount = await this.account.create(ID.unique(),email, password, name)
+            const userAccount = await account.create(ID.unique(),email, password, name)
             
             if (userAccount){
                 return this.login({email, password})
@@ -23,34 +22,41 @@ export class AuthService {
             }
 
         } catch (error) {
-            console.log("appwrith service login()",error);
+            console.log("appwrith service createAccount() in auth.js",error);
+            throw error;
         }
-    }
+    },
+
     async login({email, password}){
+
         try {
-            return await this.account.createEmailPasswordSession(email,password)
+            return await account.createEmailPasswordSession(email,password)
         } catch (error) {
-            console.log("appwrith service login()",error);
+            console.log("appwrith service login() in auth.js",error);
+            throw error;
         }
-    }
+    },
+
     async getCurrentUser(){
         try {
-            await this.account.get()
+            return await account.get()
+            
         } catch (error) {
-            console.log("appwrith service getCurrentUser()",error);
+            console.log("appwrith service getCurrentUser() in auth.js",error);
+            throw error;
+            
         }
-        return null
-    }
+    },
+    
     async logout(){
         try {
-            await this.account.deleteSessions()
+            await this.account.deleteSession("current")
+            
         } catch (error) {
-            console.log("appwrith service logout()",error);
+            console.log("appwrith service logout() in auth.js",error);
+            throw error;
         }
-    }
-
-}
-
-const authService = new AuthService()
+    },
+};
 
 export default authService

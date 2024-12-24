@@ -9,13 +9,23 @@ import Container from "../components/container/Container"
 
 function AllPosts() {
   const [posts, setPosts] = useState([])
+  const [loading , setLoading] = useState(true)
 
   useEffect(() => {
-    appwriteService.getPosts([]).then((posts)=> {
-      if (posts)
-         setPosts(posts.documents) 
-    })
-  }, [])
+    appwriteService.getPost([])
+        .then((response)=> {
+          if (response && response.documents) {
+            setPosts(response.documents);
+          }
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log("AllPosts :: useEffect()", error);
+          setLoading(false)
+        });
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
 
   if (posts.length === 0) {
     <div className='w-full py-8'>

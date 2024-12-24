@@ -22,6 +22,9 @@ function Post() {
       }
     })
   } 
+  const filePreview = post?.featuredImage
+      ? appwriteService.getFilePreview(post.featuredImage) : null;
+
 
   useEffect(() => {
     if (slug) {
@@ -38,6 +41,14 @@ function Post() {
   return post? (
     <div className='py-8'>
         <Container>
+          <div className='flex justify-between items-center mb-6'>
+            {filePreview && (
+              <img src={filePreview}
+              alt={post.title}
+              className='rounded-xl'
+              />
+            )}
+          </div>
           <div className='w-full flex justify-center mb-4 relative border rounded-xl p-2'>
             <img src={appwriteService.getFilePreview(post.featuredImage)} alt={post.title} className='rounded-xl' />
             {isAuthour && (

@@ -11,16 +11,19 @@ import {useDispatch} from 'react-redux'
 
 function Signup() {
     const navigate = useNavigate();
-    const [error , setError] = useState('');
+    const [error, setError] = useState('');
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
 
     const create = async (data) => {
+        console.log('Form submitted with data:', data); // Debugging statement
         setError('')
         try {
             const userData = await authService.createAccount(data);
+            console.log('User data:', userData); // Debugging statement
             if(userData) {
                 const user = await authService.getCurrentUser()
+                console.log('Current user:', user); // Debugging statement
                 if(user) {
                     //dispatch(login(user))
                     dispatch(login({ userData: user }));
@@ -28,6 +31,7 @@ function Signup() {
                 }
             }
         } catch (error) {
+            console.error('Error during signup:', error); // Debugging statement
             setError(error.message)
         }}
 
